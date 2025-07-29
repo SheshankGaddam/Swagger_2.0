@@ -1,0 +1,209 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "UpdateContactAPI",
+    "version" : "1.0.0",
+    "description" : "Updates Contacts from Salesforce with Email Id and ContactId."
+  },
+  "PUT" : {
+    "/contacts" : {
+      "post" : {
+        "operationId" : "updateContact",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "$ref" : "#/definitions/updateContactResp"
+            }
+          },
+          "400" : {
+            "description" : "Insufficient mandatory data provided to service",
+            "schema" : {
+              "$ref" : "#/definitions/updateContactResp"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "schema" : {
+              "$ref" : "#/definitions/updateContactResp"
+            }
+          },
+          "412" : {
+            "description" : "Invalid Data Input Value",
+            "schema" : {
+              "$ref" : "#/definitions/updateContactResp"
+            }
+          },
+          "500" : {
+            "description" : "Technical failure on the service",
+            "schema" : {
+              "$ref" : "#/definitions/updateContactResp"
+            }
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Updates Contacts on Salesforce with Email and ContactId.",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/updateContactData"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        }, {
+          "name" : "sourceCountry",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Source Country Code"
+        }, {
+          "name" : "uuid",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Unique id for each request"
+        }, {
+          "name" : "X-IBM-Client-Secret",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Client Secret"
+        }, {
+          "name" : "operationName",
+          "in" : "header",
+          "type" : "string",
+          "description" : "Operation Name"
+        }, {
+          "name" : "serviceName",
+          "in" : "header",
+          "type" : "string",
+          "description" : "Service Name"
+        }, {
+          "name" : "requestDateTime",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Current date time of Request"
+        }, {
+          "name" : "X-IBM-Client-Id",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Client ID"
+        }, {
+          "name" : "callingSystemName",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "CallingSystemName"
+        }, {
+          "name" : "targetSystemName",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "TargetSystemName"
+        } ]
+      }
+    }
+  },
+  "basePath" : "/UpdateContact/v1",
+  "definitions" : {
+    "updateContactData" : {
+      "type" : "object",
+      "properties" : {
+        "updateContactData" : {
+          "$ref" : "#/definitions/updateContactDataReq"
+        }
+      }
+    },
+    "updateContactDataReq" : {
+      "type" : "object",
+      "properties" : {
+        "updateContactDataList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/updateContactRequestData"
+          },
+          "minItems" : 1,
+          "maxItems" : 200
+        }
+      }
+    },
+    "updateContactRequestData" : {
+      "type" : "object",
+      "properties" : { }
+    },
+    "updateContactResponseData" : {
+      "type" : "object",
+      "properties" : {
+        "successFlag" : {
+          "type" : "boolean"
+        },
+        "sourceCountryCode" : {
+          "type" : "string"
+        },
+        "sfdcupdateContactId" : {
+          "type" : "string"
+        },
+        "updateContactError" : {
+          "type" : "object",
+          "properties" : {
+            "errorCode" : {
+              "type" : "string"
+            },
+            "errorDescription" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "errorMessageDataType" : {
+      "type" : "object",
+      "properties" : {
+        "customErrorMessageCode" : {
+          "type" : "string"
+        },
+        "customErrorMessageDescription" : {
+          "type" : "string"
+        },
+        "customErrorMessageLongDescription" : {
+          "type" : "string"
+        },
+        "errorMessageCode" : {
+          "type" : "string"
+        },
+        "errorMessageDescription" : {
+          "type" : "string"
+        },
+        "errorMessageId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "updateContactRespData" : {
+      "type" : "object",
+      "properties" : {
+        "updateContactResponseDataList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/updateContactResponseData"
+          }
+        },
+        "errorMessages" : {
+          "$ref" : "#/definitions/errorMessageDataType"
+        }
+      }
+    },
+    "updateContactResp" : {
+      "type" : "object",
+      "properties" : {
+        "updateContactResponseData" : {
+          "$ref" : "#/definitions/updateContactRespData"
+        }
+      }
+    }
+  }
+}
