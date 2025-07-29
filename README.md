@@ -25,7 +25,7 @@ This repository serves as a centralized collection of Swagger (OpenAPI Specifica
 |-------------------------------|-------------|
 | **PostProjectAPI_V1**         | Accepts project data payloads and integrates with backend systems to create new project records. Used in project lifecycle and tracking systems. |
 | **GetAccountAPI_V1**          | Fetches detailed account information, including user profiles, linked services, and account status. Typically used for authentication and account overview. |
-| **GetCustomerLicensesAPI_V1**| Retrieves license details associated with a customer, including product usage entitlements, renewal dates, and license types. |
+| **GetPaymentDetailsAPI_V1**| Fetches Payment related data along with OrderID from Mollie using Payment reference ID. |
 | **PostSubscriptionAPI_V1**   | Submits new subscription requests for a service, supporting telecom and SaaS billing flows. Integrates with external vendor systems for provisioning. |
 | **UpdateContactInfoAPI_V1**  | Updates user contact details (email, phone, address) in the central customer records database, used across CRM and KYC systems. |
 
