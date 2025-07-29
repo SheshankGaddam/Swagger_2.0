@@ -1,0 +1,500 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GetAccountInfoAPI",
+    "version": "1.0.0",
+    "description": "GetAccountInfo REST API to fetch account information from SFDC."
+  },
+  "paths": {
+    "/accounts": {
+      "get": {
+        "operationId": "getAccountInfo",
+        "summary": "Gets Accounts from SFDC using Source Account Number or SFDC Id or VAT Number or Org Id or Account Name or Phone Number.",
+        "responses": {
+          "200": {
+            "description": "The operation was successful.",
+            "headers": {
+              "uuid": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "responseDateTime": {
+                "type": "string",
+                "description": "Response Time"
+              },
+              "hostName": {
+                "type": "string",
+                "description": "Hostname of the server"
+              },
+              "sourceCountry": {
+                "type": "string",
+                "description": "Source Country Code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/accountResp"
+            }
+          },
+          "400": {
+            "description": "Insufficient mandatory data provided to service",
+            "headers": {
+              "uuid": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "responseDateTime": {
+                "type": "string",
+                "description": "Response Time"
+              },
+              "hostName": {
+                "type": "string",
+                "description": "Hostname of the server"
+              },
+              "sourceCountry": {
+                "type": "string",
+                "description": "Source Country Code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/accountResp"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "uuid": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "responseDateTime": {
+                "type": "string",
+                "description": "Response Time"
+              },
+              "hostName": {
+                "type": "string",
+                "description": "Hostname of the server"
+              },
+              "sourceCountry": {
+                "type": "string",
+                "description": "Source Country Code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/accountResp"
+            }
+          },
+          "412": {
+            "description": "Invalid Data Input Value",
+            "headers": {
+              "uuid": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "responseDateTime": {
+                "type": "string",
+                "description": "Response Time"
+              },
+              "hostName": {
+                "type": "string",
+                "description": "Hostname of the server"
+              },
+              "sourceCountry": {
+                "type": "string",
+                "description": "Source Country Code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/accountResp"
+            }
+          },
+          "420": {
+            "description": "Error returned from SFDC",
+            "headers": {
+              "uuid": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "responseDateTime": {
+                "type": "string",
+                "description": "Response Time"
+              },
+              "hostName": {
+                "type": "string",
+                "description": "Hostname of the server"
+              },
+              "sourceCountry": {
+                "type": "string",
+                "description": "Source Country Code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/accountResp"
+            }
+          },
+          "500": {
+            "description": "Technical failure on the service",
+            "headers": {
+              "uuid": {
+                "type": "string",
+                "description": "unique identifier"
+              },
+              "responseDateTime": {
+                "type": "string",
+                "description": "Response Time"
+              },
+              "hostName": {
+                "type": "string",
+                "description": "Hostname of the server"
+              },
+              "sourceCountry": {
+                "type": "string",
+                "description": "Source Country Code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/accountResp"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets account info from EU TAA SFDC",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "accountNumber",
+            "type": "string",
+            "required": false,
+            "description": "External account number to which the account belongs to."
+          },
+          {
+            "in": "query",
+            "name": "sfdcId",
+            "type": "string",
+            "required": false,
+            "description": "Customer Account Code of the account."
+          },
+          {
+            "in": "query",
+            "name": "AAAOrgId",
+            "type": "string",
+            "required": false,
+            "description": "AAAOrgId of the account."
+          },
+          {
+            "in": "query",
+            "name": "vatNumber",
+            "type": "string",
+            "required": false,
+            "description": "vatNumber of the account."
+          },
+          {
+            "in": "query",
+            "name": "accountName",
+            "type": "string",
+            "required": false,
+            "description": "name of the account."
+          },
+          {
+            "in": "query",
+            "name": "phoneNumber",
+            "type": "string",
+            "required": false,
+            "description": "phoneNumber of the account."
+          },
+          {
+            "name": "requestDateTime",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Current date time of Request"
+          },
+          {
+            "name": "serviceName",
+            "in": "header",
+            "type": "string",
+            "description": "Service Name"
+          },
+          {
+            "name": "operationName",
+            "in": "header",
+            "type": "string",
+            "description": "Operation Name"
+          },
+          {
+            "name": "X-IBM-Client-Id",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Client ID"
+          },
+          {
+            "name": "targetSystemName",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "TargetSystemName"
+          },
+          {
+            "name": "uuid",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Unique id for each request"
+          },
+          {
+            "name": "X-IBM-Client-Secret",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Client Secret"
+          },
+          {
+            "name": "callingSystemName",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "CallingSystemName"
+          },
+          {
+            "name": "sourceCountry",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Source Country Code"
+          }
+        ]
+      }
+    }
+  },
+  "basePath": "/getAccount/v1",
+  "definitions": {
+    "errorMessageDataType": {
+      "type": "object",
+      "properties": {
+        "customErrorMessageCode": {
+          "type": "string"
+        },
+        "customErrorMessageDescription": {
+          "type": "string"
+        },
+        "customErrorMessageLongDescription": {
+          "type": "string"
+        },
+        "errorMessageCode": {
+          "type": "string"
+        },
+        "errorMessageDescription": {
+          "type": "string"
+        },
+        "errorMessageId": {
+          "type": "string"
+        }
+      }
+    },
+    "accountInfoResponseData": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string"
+        },
+        "accountNumber": {
+          "type": "string"
+        },
+        "salesforceAccountId": {
+          "type": "string"
+        },
+        "accountDescription": {
+          "type": "string"
+        },
+        "numberOfEmployees": {
+          "type": "string"
+        },
+        "parentAccountNumber": {
+          "type": "string"
+        },
+        "sic": {
+          "type": "string"
+        },
+        "eligibleForService": {
+          "type": "boolean"
+        },
+        "VATNumber": {
+          "type": "string"
+        },
+        "customerClassification": {
+          "type": "string"
+        },
+        "NPSScore": {
+          "type": "string"
+        },
+        "sourceSystemDisplayURL": {
+          "type": "string"
+        },
+        "NPSScoreDescription": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "number"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "lastModifiedDate": {
+          "type": "string"
+        },
+        "accountType": {
+          "type": "string"
+        },
+        "sourceCountryCode": {
+          "type": "string"
+        },
+        "sourceSystem": {
+          "type": "string"
+        },
+        "sourceAccountNumber": {
+          "type": "string"
+        },
+        "sourceSystemOrderURL": {
+          "type": "string"
+        },
+        "sourceSystemInvoiceURL": {
+          "type": "string"
+        },
+        "accountRecordType": {
+          "type": "string"
+        },
+        "alternateAccountNumbers": {
+          "type": "string"
+        },
+        "AAAOrgId": {
+          "type": "boolean"
+        },
+        "Address": {
+          "type": "object"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "additionalInfo": {
+          "type": "string"
+        },
+        "accountOwner": {
+          "type": "string"
+        },
+        "accountTier": {
+          "type": "string"
+        },
+        "municipality": {
+          "type": "string"
+        },
+        "NACECode": {
+          "type": "string"
+        },
+        "NACEDescription": {
+          "type": "string"
+        },
+        "mailingOptOut": {
+          "type": "string"
+        },
+        "registrationNumber": {
+          "type": "string"
+        },
+        "TAACommonSegments": {
+          "type": "string"
+        },
+        "turnover": {
+          "type": "boolean"
+        },
+        "VATPNumber": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "currencyIsoCode": {
+          "type": "string"
+        },
+        "segmentation": {
+          "type": "string"
+        },
+        "eligibleForSales": {
+          "type": "string"
+        },
+        "accountEmail": {
+          "type": "string"
+        },
+        "accountPhone": {
+          "type": "string"
+        },
+        "accountWebsite": {
+          "type": "string"
+        },
+        "overdueAmount": {
+          "type": "string"
+        },
+        "dunAndBradstreetInfo": {
+          "type": "boolean"
+        },
+        "yieldPortfolioFlag": {
+          "type": "string"
+        },
+        "totalPortfolioValue": {
+          "type": "string"
+        },
+        "marketSegment": {
+          "type": "string"
+        },
+        "marketSubSegment": {
+          "type": "string"
+        },
+        "priceList": {
+          "type": "string"
+        },
+        "invoicePreference": {
+          "type": "string"
+        },
+        "accountError": {
+          "type": "object",
+          "properties": {
+            "errorCode": {
+              "type": "string"
+            },
+            "errorMessage": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "accountRespData": {
+      "type": "object",
+      "properties": {
+        "totalAccounts": {
+          "type": "number"
+        },
+        "accountResponseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountInfoResponseData"
+          }
+        },
+        "errorMessages": {
+          "$ref": "#/definitions/errorMessageDataType"
+        }
+      }
+    },
+    "accountResp": {
+      "type": "object",
+      "properties": {
+        "getAccountResponse": {
+          "$ref": "#/definitions/accountRespData"
+        }
+      }
+    }
+  }
+}
