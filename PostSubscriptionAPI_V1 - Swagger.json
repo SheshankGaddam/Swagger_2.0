@@ -1,0 +1,326 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "PostSubscriptionAPI",
+    "version" : "1.0.0",
+    "description" : "Creates and Updates Subscriptions as line items of a contract in SFDC from ERP."
+  },
+  "paths" : {
+    "/subscriptions" : {
+      "post" : {
+        "operationId" : "postSubscription",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "$ref" : "#/definitions/subscriptionResp"
+            }
+          },
+          "400" : {
+            "description" : "Insufficient mandatory data provided to service",
+            "schema" : {
+              "$ref" : "#/definitions/subscriptionResp"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "schema" : {
+              "$ref" : "#/definitions/subscriptionResp"
+            }
+          },
+          "412" : {
+            "description" : "Invalid Data Input Value",
+            "schema" : {
+              "$ref" : "#/definitions/subscriptionResp"
+            }
+          },
+          "500" : {
+            "description" : "Technical failure on the service",
+            "schema" : {
+              "$ref" : "#/definitions/subscriptionResp"
+            }
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Creates and Updates Subscriptions as line items of a contract in EU TAA SFDC from ERP.",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/subscriptionData"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        }, {
+          "name" : "sourceCountry",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Source Country Code"
+        }, {
+          "name" : "uuid",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Unique id for each request"
+        }, {
+          "name" : "X-IBM-Client-Secret",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Client Secret"
+        }, {
+          "name" : "operationName",
+          "in" : "header",
+          "type" : "string",
+          "description" : "Operation Name"
+        }, {
+          "name" : "serviceName",
+          "in" : "header",
+          "type" : "string",
+          "description" : "Service Name"
+        }, {
+          "name" : "requestDateTime",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Current date time of Request"
+        }, {
+          "name" : "X-IBM-Client-Id",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Client ID"
+        }, {
+          "name" : "callingSystemName",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "CallingSystemName"
+        }, {
+          "name" : "targetSystemName",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "TargetSystemName"
+        } ]
+      }
+    }
+  },
+  "basePath" : "/Subscription/v1",
+  "definitions" : {
+    "subscriptionData" : {
+      "type" : "object",
+      "properties" : {
+        "subscriptionData" : {
+          "$ref" : "#/definitions/subscriptionDataReq"
+        }
+      }
+    },
+    "subscriptionDataReq" : {
+      "type" : "object",
+      "properties" : {
+        "subscriptionDataList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/subscriptionRequestData"
+          },
+          "minItems" : 1,
+          "maxItems" : 200
+        }
+      }
+    },
+    "subscriptionRequestData" : {
+      "type" : "object",
+      "properties" : {
+        "accountNumber" : {
+          "type" : "string",
+          "description" : "Account Number associated to the Subscription details."
+        },
+        "discount" : {
+          "type" : "number",
+          "description" : "Discount for the subscription."
+        },
+        "additionalDiscountAmount" : {
+          "type" : "number",
+          "description" : "Additional Discount Amount for the subscription"
+        },
+        "contractNumber" : {
+          "type" : "string",
+          "description" : "Contract Number associated to a subscription."
+        },
+        "currencyIsoCode" : {
+          "type" : "string",
+          "description" : "Currency Iso Code."
+        },
+        "customerPrice" : {
+          "type" : "number",
+          "description" : "Customer Price"
+        },
+        "endDate" : {
+          "type" : "string",
+          "description" : "Contract End Date"
+        },
+        "listPrice" : {
+          "type" : "number",
+          "description" : "Price List."
+        },
+        "netPrice" : {
+          "type" : "number",
+          "description" : "Net Price."
+        },
+        "pricingMethod" : {
+          "type" : "string",
+          "description" : "Pricing Method."
+        },
+        "productCode" : {
+          "type" : "string",
+          "description" : "Product's code of SFDC."
+        },
+        "productSubscriptionType" : {
+          "type" : "string",
+          "description" : "Product Subscription Type."
+        },
+        "quantity" : {
+          "type" : "number",
+          "description" : "Quantity."
+        },
+        "regularPrice" : {
+          "type" : "number",
+          "description" : "Regular Price."
+        },
+        "startDate" : {
+          "type" : "string",
+          "description" : "Subscription Start Date."
+        },
+        "subscriptionPricing" : {
+          "type" : "string",
+          "description" : "Subscription Pricing."
+        },
+        "subscriptionType" : {
+          "type" : "string",
+          "description" : "Subscription Type."
+        },
+        "sfdcReferenceNumber" : {
+          "type" : "string",
+          "description" : "Sfdc Reference Number."
+        },
+        "sourceContractLineNumber" : {
+          "type" : "string",
+          "description" : "ERP's Contract Line Number."
+        },
+        "renewalProductId" : {
+          "type" : "string",
+          "description" : "Renewal Product Id."
+        },
+        "sourceCountryCode" : {
+          "type" : "string"
+        },
+        "parentContractLineNumber" : {
+          "type" : "string"
+        },
+        "contractLICount" : {
+          "type" : "string"
+        },
+        "bundleFlag" : {
+          "type" : "boolean"
+        },
+        "serviceStartDate" : {
+          "type" : "string",
+          "description" : "Service Start Date."
+        },
+        "serviceEndDate" : {
+          "type" : "string",
+          "description" : "Service End Date."
+        },
+        "terminatedDate" : {
+          "type" : "string",
+          "description" : "terminate Date."
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "Status."
+        },
+        "discountAmount" : {
+          "type" : "number",
+          "description" : "Discount Amount for the subscription."
+          },
+          "renewalQuantity" : {
+          "type" : "number",
+          "description" : "Discount Amount for the subscription."
+          }
+      }
+    },
+    "subscriptionResponseData" : {
+      "type" : "object",
+      "properties" : {
+        "successFlag" : {
+          "type" : "boolean"
+        },
+        "sfdcSubscriptionId" : {
+          "type" : "string"
+        },
+        "sourceContractLineNumber" : {
+          "type" : "string"
+        },
+        "subscriptionError" : {
+          "type" : "object",
+          "properties" : {
+            "errorCode" : {
+              "type" : "string"
+            },
+            "errorDescription" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "errorMessageDataType" : {
+      "type" : "object",
+      "properties" : {
+        "customErrorMessageCode" : {
+          "type" : "string"
+        },
+        "customErrorMessageDescription" : {
+          "type" : "string"
+        },
+        "customErrorMessageLongDescription" : {
+          "type" : "string"
+        },
+        "errorMessageCode" : {
+          "type" : "string"
+        },
+        "errorMessageDescription" : {
+          "type" : "string"
+        },
+        "errorMessageId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "subscriptionRespData" : {
+      "type" : "object",
+      "properties" : {
+        "subscriptionResponseDataList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/subscriptionResponseData"
+          }
+        },
+        "errorMessages" : {
+          "$ref" : "#/definitions/errorMessageDataType"
+        }
+      }
+    },
+    "subscriptionResp" : {
+      "type" : "object",
+      "properties" : {
+        "subscriptionResponseData" : {
+          "$ref" : "#/definitions/subscriptionRespData"
+        }
+      }
+    }
+  }
+}
