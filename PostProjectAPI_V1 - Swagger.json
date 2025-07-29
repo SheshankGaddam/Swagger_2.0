@@ -1,0 +1,252 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "PostProjectAPI",
+    "version" : "1.0.0",
+    "description" : "Creates Projects in SFDC as part of the Field Services implementation"
+  },
+  "paths" : {
+    "/projects" : {
+      "post" : {
+        "operationId" : "postProject",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "$ref" : "#/definitions/postProjectResp"
+            }
+          },
+          "400" : {
+            "description" : "Insufficient mandatory data provided to service",
+            "schema" : {
+              "$ref" : "#/definitions/postProjectResp"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "schema" : {
+              "$ref" : "#/definitions/postProjectResp"
+            }
+          },
+          "412" : {
+            "description" : "Invalid Data Input Value",
+            "schema" : {
+              "$ref" : "#/definitions/postProjectResp"
+            }
+          },
+          "500" : {
+            "description" : "Technical failure on the service",
+            "schema" : {
+              "$ref" : "#/definitions/postProjectResp"
+            }
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Creates Projects in EU SFDC",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/projectData"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        }, {
+          "name" : "sourceCountry",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Source Country Code"
+        }, {
+          "name" : "uuid",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Unique id for each request"
+        }, {
+          "name" : "X-IBM-Client-Secret",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Client Secret"
+        }, {
+          "name" : "operationName",
+          "in" : "header",
+          "type" : "string",
+          "description" : "Operation Name"
+        }, {
+          "name" : "serviceName",
+          "in" : "header",
+          "type" : "string",
+          "description" : "Service Name"
+        }, {
+          "name" : "requestDateTime",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Current date time of Request"
+        }, {
+          "name" : "X-IBM-Client-Id",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Client ID"
+        }, {
+          "name" : "callingSystemName",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "CallingSystemName"
+        }, {
+          "name" : "targetSystemName",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "TargetSystemName"
+        } ]
+      }
+    }
+  },
+  "basePath" : "/PostProject/v1",
+  "definitions" : {
+    "projectData" : {
+      "type" : "object",
+      "properties" : {
+        "projectData" : {
+          "$ref" : "#/definitions/projectDataReq"
+        }
+      }
+    },
+    "projectDataReq" : {
+      "type" : "object",
+      "properties" : {
+        "projectDataList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/projectRequestData"
+          },
+          "minItems" : 1,
+          "maxItems" : 200
+        }
+      }
+    },
+    "projectRequestData" : {
+      "type" : "object",
+      "properties" : {
+        "sourceCountryCode" : {
+          "type" : "string"
+        },
+        "sourceOrderNumber" : {
+          "type" : "string"
+        },
+        "startDate" : {
+          "type" : "string"
+        },
+        "endDate" : {
+          "type" : "string"
+        },
+        "ownerId" : {
+          "type" : "string"
+        },
+        "subject" : {
+          "type" : "string"
+        },
+        "team" : {
+          "type" : "string"
+        },
+        "accountNumber" : {
+          "type" : "string"
+        },
+        "contactNumber" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "projectCategory" : {
+          "type" : "string"
+        },
+        "sourceSystem" : {
+          "type" : "string"
+        },
+        "currencyIsoCode" : {
+          "type" : "string"
+        }
+      }
+    },
+    "projectResponseData" : {
+      "type" : "object",
+      "properties" : {
+        "sourceOrderNumber" : {
+          "type" : "string"
+        },
+        "sourceCountryCode" : {
+          "type" : "string"
+        },
+        "sfdcProjectId" : {
+          "type" : "string"
+        },
+        "successFlag" : {
+          "type" : "boolean"
+        },
+        "postProjectError" : {
+          "type" : "object",
+          "properties" : {
+            "errorCode" : {
+              "type" : "string"
+            },
+            "errorDescription" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "errorMessageDataType" : {
+      "type" : "object",
+      "properties" : {
+        "customErrorMessageCode" : {
+          "type" : "string"
+        },
+        "customErrorMessageDescription" : {
+          "type" : "string"
+        },
+        "customErrorMessageLongDescription" : {
+          "type" : "string"
+        },
+        "errorMessageCode" : {
+          "type" : "string"
+        },
+        "errorMessageDescription" : {
+          "type" : "string"
+        },
+        "errorMessageId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "projectRespData" : {
+      "type" : "object",
+      "properties" : {
+        "projectResponseDataList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/projectResponseData"
+          }
+        },
+        "errorMessages" : {
+          "$ref" : "#/definitions/errorMessageDataType"
+        }
+      }
+    },
+    "postProjectResp" : {
+      "type" : "object",
+      "properties" : {
+        "projectResponseData" : {
+          "$ref" : "#/definitions/projectRespData"
+        }
+      }
+    }
+  }
+}
