@@ -1,0 +1,164 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "GetPaymentDetailsAPI",
+    "version" : "1.0.0",
+    "description" : "Fetches Payment related data along with OrderID from Mollie using Payment reference ID."
+  },
+  "paths" : {
+    "/paymentdetails" : {
+      "get" : {
+        "operationId" : "paymentDetails",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "$ref" : "#/definitions/paymentDetailsResp"
+            }
+          },
+          "400" : {
+            "description" : "Insufficient mandatory data provided to service",
+            "schema" : {
+              "$ref" : "#/definitions/paymentDetailsResp"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "schema" : {
+              "$ref" : "#/definitions/paymentDetailsResp"
+            }
+          },
+          "412" : {
+            "description" : "Invalid Data Input Value",
+            "schema" : {
+              "$ref" : "#/definitions/paymentDetailsResp"
+            }
+          },
+          "500" : {
+            "description" : "Technical failure on the service",
+            "schema" : {
+              "$ref" : "#/definitions/paymentDetailsResp"
+            }
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Fetches Payment related data along with OrderID from Mollie using Payment reference ID.",
+        "parameters" : [ {
+          "name" : "sourceCountry",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Source Country Code"
+        }, {
+          "name" : "uuid",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Unique id for each request"
+        }, {
+          "name" : "X-IBM-Client-Secret",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Client Secret"
+        }, {
+          "name" : "operationName",
+          "in" : "header",
+          "type" : "string",
+          "description" : "Operation Name"
+        }, {
+          "name" : "serviceName",
+          "in" : "header",
+          "type" : "string",
+          "description" : "Service Name"
+        }, {
+          "name" : "requestDateTime",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Current date time of Request"
+        }, {
+          "name" : "X-IBM-Client-Id",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Client ID"
+        }, {
+          "name" : "callingSystemName",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "CallingSystemName"
+        }, {
+          "name" : "targetSystemName",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "TargetSystemName"
+        }, {
+          "name" : "paymentRefID",
+          "in" : "header",
+          "type" : "string",
+          "required" : true,
+          "description" : "Payment Reference ID"
+        } ]
+      }
+    }
+  },
+  "basePath" : "/paymentdetails/v1",
+  "definitions" : {
+    "getPaymentDetailsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "successFlag" : {
+          "type" : "boolean"
+        },
+        "sourceCountryCode" : {
+          "type" : "string"
+        },
+        "paymentRefID" : {
+          "type" : "string"
+        },
+        "paymentResponseData" : {
+          "type" : "object",
+          "description" : "Payment Response Data for the entered Payment referenceID in Header"
+        }
+      }
+    },
+    "errorMessageDataType" : {
+      "type" : "object",
+      "properties" : {
+        "customErrorMessageCode" : {
+          "type" : "string"
+        },
+        "customErrorMessageDescription" : {
+          "type" : "string"
+        },
+        "customErrorMessageLongDescription" : {
+          "type" : "string"
+        },
+        "errorMessageCode" : {
+          "type" : "string"
+        },
+        "errorMessageDescription" : {
+          "type" : "string"
+        },
+        "errorMessageId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "paymentDetailsResp" : {
+      "type" : "object",
+      "properties" : {
+        "getPaymentDetailsResponse" : {
+          "$ref" : "#/definitions/getPaymentDetailsResponse"
+        },
+        "errorMessages" : {
+          "$ref" : "#/definitions/errorMessageDataType"
+        }
+      }
+    }
+  }
+}
